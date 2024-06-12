@@ -12,12 +12,14 @@ async function createVaga(req: Request, res: Response) {
             categoria,
             descricao,
             requisitos,
+            salario,
+            quantidade,
             dataAbertura,
             dataFechamento,
 
         } = req.body;
         //validacao pelo zod
-        VagaSchema.parse({ titulo, categoria, descricao, requisitos, dataAbertura: new Date(dataAbertura).toISOString(), dataFechamento: new Date(dataFechamento).toISOString() });
+        VagaSchema.parse({ titulo, categoria, descricao, requisitos,salario,quantidade, dataAbertura: new Date(dataAbertura).toISOString(), dataFechamento: new Date(dataFechamento).toISOString() });
 
 
         const createdVaga = await Vaga.vaga.create({
@@ -26,6 +28,8 @@ async function createVaga(req: Request, res: Response) {
                 categoria,
                 descricao,
                 requisitos,
+                salario,
+                quantidade,
                 dataAbertura: new Date(dataAbertura).toISOString(),
                 dataFechamento: new Date(dataFechamento).toISOString(),
             }
@@ -47,6 +51,8 @@ async function updateVaga(req: Request, res: Response) {
             categoria: z.string().min(1),
             descricao: z.string().min(1),
             requisitos: z.string().min(1),
+            salario : z.string().min(1),
+            quantidade: z.string().min(1),
             dataAbertura: z.string(),
             dataFechamento: z.string(),
         }).partial();

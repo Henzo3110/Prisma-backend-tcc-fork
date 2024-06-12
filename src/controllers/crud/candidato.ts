@@ -16,9 +16,10 @@ async function createCandidato(req: Request, res: Response) {
             cpf,
             dataNascimento,
             telefone,
+            sobreMim
         } = req.body;
         //verificação pelo zod
-        candidatoSchema.parse({ id_user, id_endereco, nome, sobrenome, cpf, dataNascimento: new Date(dataNascimento).toISOString(), telefone });
+        candidatoSchema.parse({ id_user, id_endereco, nome, sobrenome, cpf, dataNascimento: new Date(dataNascimento).toISOString(), telefone, sobreMim });
         if(!candidatoSchema.parse) {
             return res.status(409).json({message: 'Erro na validação dos dados'});
         }
@@ -45,6 +46,7 @@ async function createCandidato(req: Request, res: Response) {
                     cpf,
                     dataNascimento: new Date(dataNascimento).toISOString(),
                     telefone,
+                    sobreMim
                 }
             })
             return res.status(201).json({ message: `candidato criado com sucesso!` });
@@ -71,6 +73,7 @@ async function UpdateCandidato(req: Request, res: Response) {
             cpf: z.string().length(11),
             dataNascimento: z.string(),
             telefone: z.string().length(11),
+            sobreMim : z.string().min(1)
         }).partial();
 
         const parsedData = schema.safeParse(updateData);
