@@ -45,6 +45,7 @@ model UserCandidato{
   dataNascimento DateTime 
   telefone String @db.Char(11)
   candidatoVaga CandidatoVaga[]
+  sobreMim String @db.LongText
   curriculo Curriculo_form?
 }
 
@@ -64,6 +65,7 @@ model Curriculo_form {
   periodoEstudo String @db.Char(100)
   competenciasExtracurricular String @db.LongText
   certificacoes String @db.LongText
+  empresasAntecedentes String? @db.LongText
 }
 
 model CandidatoVaga{
@@ -85,6 +87,8 @@ model Vaga{
   categoria String @db.Char(100)
   descricao String @db.LongText
   requisitos String @db.LongText
+  salario String @db.Char(10)
+  quantidade String @db.Char(4)
   dataAbertura DateTime
   dataFechamento DateTime
   CandidatoVaga CandidatoVaga[]
