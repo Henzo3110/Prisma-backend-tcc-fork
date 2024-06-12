@@ -3,7 +3,7 @@
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./dist",
-      "rootDir": "./gisrc",
+      "rootDir": "./src",
       "esModuleInterop": true,
       "strict": true,
       "target": "ES6",
