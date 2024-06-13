@@ -4,7 +4,7 @@ CREATE TABLE `User` (
     `email` CHAR(100) NOT NULL,
     `senha` VARCHAR(191) NOT NULL,
     `tipo` VARCHAR(191) NOT NULL,
-    `status` INTEGER NOT NULL,
+    `status` INTEGER NOT NULL DEFAULT 0,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -41,6 +41,7 @@ CREATE TABLE `UserCandidato` (
     `cpf` CHAR(11) NOT NULL,
     `dataNascimento` DATETIME(3) NOT NULL,
     `telefone` CHAR(11) NOT NULL,
+    `sobreMim` LONGTEXT NOT NULL,
 
     UNIQUE INDEX `UserCandidato_id_endereco_key`(`id_endereco`),
     UNIQUE INDEX `UserCandidato_id_user_key`(`id_user`),
@@ -54,11 +55,17 @@ CREATE TABLE `Curriculo_form` (
     `id_userCandidato` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `escolaridade` CHAR(100) NOT NULL,
-    `experienciasAnt` LONGTEXT NOT NULL,
+    `nomeEmpresa` CHAR(100) NOT NULL,
+    `cargo` CHAR(100) NOT NULL,
+    `periodo` CHAR(100) NOT NULL,
+    `realizacoes` CHAR(255) NOT NULL,
+    `instituicao` CHAR(100) NOT NULL,
+    `grau` CHAR(100) NOT NULL,
+    `campoEstudo` CHAR(100) NOT NULL,
+    `periodoEstudo` CHAR(100) NOT NULL,
     `competenciasExtracurricular` LONGTEXT NOT NULL,
     `certificacoes` LONGTEXT NOT NULL,
-    `curriculo_anexo` VARCHAR(191) NULL DEFAULT 'SemCV',
+    `empresasAntecedentes` LONGTEXT NULL,
 
     UNIQUE INDEX `Curriculo_form_id_userCandidato_key`(`id_userCandidato`),
     PRIMARY KEY (`id_curriculoForm`)
@@ -83,10 +90,14 @@ CREATE TABLE `Vaga` (
     `id_vaga` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `dataAbertura` DATETIME(3) NOT NULL,
-    `dataFechamento` DATETIME(3) NOT NULL,
+    `titulo` CHAR(100) NOT NULL,
+    `categoria` CHAR(100) NOT NULL,
     `descricao` LONGTEXT NOT NULL,
     `requisitos` LONGTEXT NOT NULL,
+    `salario` CHAR(10) NOT NULL,
+    `quantidade` CHAR(4) NOT NULL,
+    `dataAbertura` DATETIME(3) NOT NULL,
+    `dataFechamento` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id_vaga`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -112,7 +123,8 @@ CREATE TABLE `Endereco` (
     `estado` CHAR(20) NOT NULL,
     `cidade` CHAR(100) NOT NULL,
     `bairro` CHAR(100) NOT NULL,
-    `logradouro` VARCHAR(191) NULL,
+    `logradouro` CHAR(100) NOT NULL,
+    `complemento` VARCHAR(191) NULL,
     `numero` CHAR(10) NOT NULL,
     `cep` CHAR(8) NOT NULL,
 
