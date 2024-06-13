@@ -74,11 +74,25 @@ async function updateVaga(req: Request, res: Response) {
 }
 
 async function findAllVagas(req: Request, res: Response) {
+    const { filtro } = req.query;
+
     try {
-        const Vagas = await Vaga.vaga.findMany();
-        return res.status(200).json(Vagas);
+        let vagas;
+
+        if (typeof filtro === 'string') {
+            // Consulta raw para buscar usando case-insensitive
+            vagas = await Vaga.$queryRaw`
+                SELECT * FROM Vaga
+                WHERE titulo ILIKE '%${filtro}%'
+            `;
+        } else {
+            vagas = await Vaga.vaga.findMany();
+        }
+
+        return res.json(vagas);
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        return res.status(500).json({ message: 'Erro ao buscar vagas' });
     }
 }
 
