@@ -45,7 +45,7 @@ model UserCandidato{
   dataNascimento DateTime 
   telefone String @db.Char(11)
   candidatoVaga CandidatoVaga[]
-  sobreMim String @db.LongText
+  sobreMim String? @db.LongText
   curriculo Curriculo_form?
 }
 
