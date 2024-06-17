@@ -65,7 +65,6 @@ model Curriculo_form {
   periodoEstudo String @db.Char(100)
   competenciasExtracurricular String @db.LongText
   certificacoes String @db.LongText
-  empresasAntecedentes String? @db.LongText
 }
 
 model CandidatoVaga{

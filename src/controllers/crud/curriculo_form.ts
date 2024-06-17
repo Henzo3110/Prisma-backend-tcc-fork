@@ -20,10 +20,9 @@ async function createCurriculo(req: Request, res: Response) {
             periodoEstudo,
             competenciasExtracurricular,
             certificacoes,
-            empresasAntecedentes
         } = req.body;
 
-        CurriculoFormSchema.parse({ id_userCandidato, nomeEmpresa, cargo, periodo, realizacoes, instituicao, grau, campoEstudo, periodoEstudo, competenciasExtracurricular, certificacoes, empresasAntecedentes });
+        CurriculoFormSchema.parse({ id_userCandidato, nomeEmpresa, cargo, periodo, realizacoes, instituicao, grau, campoEstudo, periodoEstudo, competenciasExtracurricular, certificacoes });
 
         const verificaCandidato = await Curriculo.userCandidato.findUnique({
             where: { id_userCandidato }
@@ -44,7 +43,6 @@ async function createCurriculo(req: Request, res: Response) {
                 periodoEstudo,
                 competenciasExtracurricular,
                 certificacoes,
-                empresasAntecedentes
             }
         });
         return res.status(201).json(curriculoForm);
@@ -69,7 +67,6 @@ async function updateCurriculo(req: Request, res: Response) {
             periodoEstudo: z.string().min(1),
             competenciasExtracurricular: z.string().min(1),
             certificacoes: z.string().min(1),
-            empresasAntecedentes: z.string().min(1)
         }).partial(); // Torna todos os campos opcionais
 
         const parsedData = schema.safeParse(updateData);

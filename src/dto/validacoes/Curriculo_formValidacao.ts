@@ -12,5 +12,4 @@ export const CurriculoFormSchema = z.object({
     periodoEstudo : z.string().min(1),
     competenciasExtracurricular : z.string().min(1),
     certificacoes: z.string().min(1),
-    empresasAntecedentes: z.string().min(1)
 })
