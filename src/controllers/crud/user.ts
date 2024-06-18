@@ -69,6 +69,11 @@ async function updateUser(req: Request, res: Response) {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        // Se a senha está presente nos dados de atualização, criptografar novamente
+        if (parsedData.data.senha) {
+            parsedData.data.senha = await bcrypt.hash(parsedData.data.senha, 10);
+        }
+
         // Atualizar o usuário
         const userUpdated = await User.user.update({
             where: { id_user },
@@ -81,6 +86,7 @@ async function updateUser(req: Request, res: Response) {
         return res.status(500).json({ error: 'Erro ao atualizar o user' });
     }
 }
+
 
 //função para retornar um json com uma lista de todos os Users
 async function findAllUsers(req: Request, res: Response) {

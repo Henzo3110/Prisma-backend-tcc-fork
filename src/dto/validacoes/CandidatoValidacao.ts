@@ -8,5 +8,5 @@ export const candidatoSchema = z.object({
     cpf : z.string().length(11).regex(new RegExp('[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}')),
     dataNascimento : z.string(), //formato (YYYY-MM-DD)
     telefone : z.string().length(11),
-    sobremim : z.string().min(1)
+    sobreMim : z.string()
 })
