@@ -11,6 +11,7 @@ async function createCandidato(req: Request, res: Response) {
         const {
             id_user,
             id_endereco,
+            id_foto,
             nome,
             sobrenome,
             cpf,
@@ -19,7 +20,7 @@ async function createCandidato(req: Request, res: Response) {
             sobreMim
         } = req.body;
         //verificação pelo zod
-        candidatoSchema.parse({ id_user, id_endereco, nome, sobrenome, cpf, dataNascimento: new Date(dataNascimento).toISOString(), telefone, sobreMim });
+        candidatoSchema.parse({ id_user, id_endereco,id_foto, nome, sobrenome, cpf, dataNascimento: new Date(dataNascimento).toISOString(), telefone, sobreMim });
         if(!candidatoSchema.parse) {
             return res.status(409).json({message: 'Erro na validação dos dados'});
         }
@@ -41,6 +42,7 @@ async function createCandidato(req: Request, res: Response) {
                 data: {
                     id_user,
                     id_endereco,
+                    id_foto,
                     nome,
                     sobrenome,
                     cpf,
@@ -68,6 +70,7 @@ async function UpdateCandidato(req: Request, res: Response) {
         const schema = z.object({
             id_user: z.string().uuid(),
             id_endereco: z.string().uuid(),
+            id_foto: z.string().uuid(),
             nome: z.string().min(1),
             sobrenome: z.string().min(1),
             cpf: z.string().length(11),

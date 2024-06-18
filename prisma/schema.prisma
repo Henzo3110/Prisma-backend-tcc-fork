@@ -30,6 +30,7 @@ model UserEmpresa{
   cnpj String @unique @db.Char(14)
   ie String @unique @db.Char(16)
   telefone String @db.Char(11)
+  sobreMim String @db.LongText
   CriaVaga CriarVaga[]
 }
 
@@ -118,4 +119,9 @@ model Endereco {
   cep String @db.Char(8) 
   UserCandidato UserCandidato[]
   UserEmpresa UserEmpresa[]
+}
+model FotoPerfil{
+  id_foto String @id @default(uuid())
+  nome String
+  caminho String   
 }
