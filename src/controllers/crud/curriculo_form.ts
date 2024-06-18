@@ -3,8 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { CurriculoFormSchema } from "../../dto/validacoes/Curriculo_formValidacao";
 import { z } from 'zod';
+import { findOneCandidato } from "./candidato";
 
 const Curriculo = new PrismaClient();
+
 
 async function createCurriculo(req: Request, res: Response) {
     try {
@@ -89,10 +91,24 @@ async function updateCurriculo(req: Request, res: Response) {
 
 async function findAllCurriculos(req: Request, res: Response) {
     try {
-        const Curriculos = await Curriculo.curriculo_form.findMany();
-        return res.status(200).json(Curriculos);
+        const curriculos = await Curriculo.curriculo_form.findMany();
+        
+        // Use Promise.all para aguardar todas as operações assíncronas
+        const result = await Promise.all(curriculos.map(async (curriculo) => {
+            const user = await Curriculo.userCandidato.findFirst({
+                where: { id_userCandidato: curriculo.id_userCandidato }
+            });
+            return {
+                ...curriculo,
+                userNome: user?.nome,
+                userSobrenome: user?.sobrenome,
+            };
+        }));
+        
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar os currículos' });
     }
 }
 
