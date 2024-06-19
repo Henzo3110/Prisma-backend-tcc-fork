@@ -121,6 +121,15 @@ CREATE TABLE `Endereco` (
     PRIMARY KEY (`id_endereco`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `FotoPerfil` (
+    `id_foto` VARCHAR(191) NOT NULL,
+    `nome` VARCHAR(191) NOT NULL,
+    `caminho` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id_foto`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `UserEmpresa` ADD CONSTRAINT `UserEmpresa_id_endereco_fkey` FOREIGN KEY (`id_endereco`) REFERENCES `Endereco`(`id_endereco`) ON DELETE RESTRICT ON UPDATE CASCADE;
 

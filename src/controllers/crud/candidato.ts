@@ -42,7 +42,7 @@ async function createCandidato(req: Request, res: Response) {
                 data: {
                     id_user,
                     id_endereco,
-                    id_foto,
+                    // id_foto,
                     nome,
                     sobrenome,
                     cpf,
