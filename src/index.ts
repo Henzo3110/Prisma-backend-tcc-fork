@@ -11,6 +11,8 @@ import RouterInscricoes from './routes/RotaInscricaoCandidatoVaga'
 import RouterLogin from './routes/RotaLogin'
 import passport from "passport";
 import RouterUsers from './routes/RotaUser'
+import RouterFoto from './routes/RotaMulter'
+
 
 
 dotenv.config();
@@ -39,6 +41,7 @@ app.use("/inscricoes", RouterInscricoes)
 app.use("/token", passport.authenticate('jwt', { session: false }), RouterLogin);
 app.use("/login", RouterLogin)
 app.use("/users", RouterUsers)
+app.use("/fotos", RouterFoto)
 
 
 app.listen(process.env.PORT, () => {

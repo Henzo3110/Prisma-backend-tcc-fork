@@ -11,6 +11,7 @@ async function CreateEmpresa(req: Request, res: Response) {
         const {
             id_user,
             id_endereco,
+            id_foto,
             razaoSocial,
             nome_fantasia,
             cnpj,
@@ -39,6 +40,7 @@ async function CreateEmpresa(req: Request, res: Response) {
                 data: {
                     id_user,
                     id_endereco,
+                    id_foto,
                     razaoSocial,
                     nome_fantasia,
                     cnpj,

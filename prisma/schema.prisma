@@ -112,3 +112,8 @@ model Endereco {
   UserCandidato UserCandidato[]
   UserEmpresa UserEmpresa[]
 }
+model FotoPerfil{
+  id_foto String @id @default(uuid())
+  nome String
+  caminho String   
+}
