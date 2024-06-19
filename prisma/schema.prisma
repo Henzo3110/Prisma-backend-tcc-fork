@@ -31,6 +31,8 @@ model UserEmpresa{
   ie String @unique @db.Char(16)
   telefone String @db.Char(11)
   sobreMim String? @db.LongText
+  areaDeAtuacao String? @db.LongText
+  especialidades String? @db.LongText
   Vaga Vaga[]
 }
 

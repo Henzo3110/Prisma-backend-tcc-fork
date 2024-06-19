@@ -76,7 +76,9 @@ async function UpdateEmpresa(req: Request, res: Response) {
             cnpj: z.string().length(14),
             ie: z.string().min(9),
             telefone: z.string().length(11),
-            sobreMim: z.string()
+            sobreMim: z.string(),
+            areaDeAtuacao: z.string(),
+            especialidades: z.string()
         }).partial();
 
         const parsedData = schema.safeParse(updateData);
