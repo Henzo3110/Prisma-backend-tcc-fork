@@ -16,9 +16,10 @@ async function CreateEmpresa(req: Request, res: Response) {
             cnpj,
             ie,
             telefone,
+            sobreMim,
         } = req.body;
         //verificação pelo zod
-        EmpresaSchema.parse({ id_user, id_endereco, razaoSocial, nome_fantasia, cnpj, ie, telefone });
+        EmpresaSchema.parse({ id_user, id_endereco, razaoSocial, nome_fantasia, cnpj, ie, telefone, sobreMim });
         //verificar endereço e User
         const VerificaEndereco = await Empresa.endereco.findUnique({
             where: { id_endereco }
@@ -43,6 +44,7 @@ async function CreateEmpresa(req: Request, res: Response) {
                     cnpj,
                     ie,
                     telefone,
+                    sobreMim
                 }
             })
             return res.status(201).json(createdEmpresa);
@@ -72,6 +74,7 @@ async function UpdateEmpresa(req: Request, res: Response) {
             cnpj: z.string().length(14),
             ie: z.string().min(9),
             telefone: z.string().length(11),
+            sobreMim: z.string()
         }).partial();
 
         const parsedData = schema.safeParse(updateData);

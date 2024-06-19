@@ -8,7 +8,6 @@ import RouterEndereco from './routes/rotaEndereco'
 import RouterVaga from './routes/RotaVaga'
 import RouterCurriculo from './routes/RotaCurriculo'
 import RouterInscricoes from './routes/RotaInscricaoCandidatoVaga'
-import RouterCriaVaga from './routes/RotaCriaVaga'
 import RouterLogin from './routes/RotaLogin'
 import passport from "passport";
 import RouterUsers from './routes/RotaUser'
@@ -37,7 +36,6 @@ app.use("/enderecos", RouterEndereco)
 app.use("/vagas", RouterVaga)
 app.use("/curriculos", RouterCurriculo)
 app.use("/inscricoes", RouterInscricoes)
-app.use("/criarVagas", RouterCriaVaga)
 app.use("/token", passport.authenticate('jwt', { session: false }), RouterLogin);
 app.use("/login", RouterLogin)
 app.use("/users", RouterUsers)

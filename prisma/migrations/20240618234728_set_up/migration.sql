@@ -23,6 +23,7 @@ CREATE TABLE `UserEmpresa` (
     `cnpj` CHAR(14) NOT NULL,
     `ie` CHAR(16) NOT NULL,
     `telefone` CHAR(11) NOT NULL,
+    `sobreMim` LONGTEXT NULL,
 
     UNIQUE INDEX `UserEmpresa_id_endereco_key`(`id_endereco`),
     UNIQUE INDEX `UserEmpresa_id_user_key`(`id_user`),
@@ -41,7 +42,7 @@ CREATE TABLE `UserCandidato` (
     `cpf` CHAR(11) NOT NULL,
     `dataNascimento` DATETIME(3) NOT NULL,
     `telefone` CHAR(11) NOT NULL,
-    `sobreMim` LONGTEXT NOT NULL,
+    `sobreMim` LONGTEXT NULL,
 
     UNIQUE INDEX `UserCandidato_id_endereco_key`(`id_endereco`),
     UNIQUE INDEX `UserCandidato_id_user_key`(`id_user`),
@@ -65,7 +66,6 @@ CREATE TABLE `Curriculo_form` (
     `periodoEstudo` CHAR(100) NOT NULL,
     `competenciasExtracurricular` LONGTEXT NOT NULL,
     `certificacoes` LONGTEXT NOT NULL,
-    `empresasAntecedentes` LONGTEXT NULL,
 
     UNIQUE INDEX `Curriculo_form_id_userCandidato_key`(`id_userCandidato`),
     PRIMARY KEY (`id_curriculoForm`)
@@ -88,6 +88,7 @@ CREATE TABLE `CandidatoVaga` (
 -- CreateTable
 CREATE TABLE `Vaga` (
     `id_vaga` VARCHAR(191) NOT NULL,
+    `id_userEmpresa` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `titulo` CHAR(100) NOT NULL,
@@ -99,19 +100,8 @@ CREATE TABLE `Vaga` (
     `dataAbertura` DATETIME(3) NOT NULL,
     `dataFechamento` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `Vaga_id_userEmpresa_key`(`id_userEmpresa`),
     PRIMARY KEY (`id_vaga`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `CriarVaga` (
-    `id_criaVaga` VARCHAR(191) NOT NULL,
-    `id_userEmpresa` VARCHAR(191) NOT NULL,
-    `id_vaga` VARCHAR(191) NOT NULL,
-    `dataCriacao` DATETIME(3) NOT NULL,
-
-    UNIQUE INDEX `CriarVaga_id_userEmpresa_key`(`id_userEmpresa`),
-    UNIQUE INDEX `CriarVaga_id_vaga_key`(`id_vaga`),
-    PRIMARY KEY (`id_criaVaga`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -153,7 +143,4 @@ ALTER TABLE `CandidatoVaga` ADD CONSTRAINT `CandidatoVaga_id_userCandidato_fkey`
 ALTER TABLE `CandidatoVaga` ADD CONSTRAINT `CandidatoVaga_id_vaga_fkey` FOREIGN KEY (`id_vaga`) REFERENCES `Vaga`(`id_vaga`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `CriarVaga` ADD CONSTRAINT `CriarVaga_id_userEmpresa_fkey` FOREIGN KEY (`id_userEmpresa`) REFERENCES `UserEmpresa`(`id_userEmpresa`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `CriarVaga` ADD CONSTRAINT `CriarVaga_id_vaga_fkey` FOREIGN KEY (`id_vaga`) REFERENCES `Vaga`(`id_vaga`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Vaga` ADD CONSTRAINT `Vaga_id_userEmpresa_fkey` FOREIGN KEY (`id_userEmpresa`) REFERENCES `UserEmpresa`(`id_userEmpresa`) ON DELETE RESTRICT ON UPDATE CASCADE;

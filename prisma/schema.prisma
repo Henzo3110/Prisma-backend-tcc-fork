@@ -30,7 +30,8 @@ model UserEmpresa{
   cnpj String @unique @db.Char(14)
   ie String @unique @db.Char(16)
   telefone String @db.Char(11)
-  CriaVaga CriarVaga[]
+  sobreMim String? @db.LongText
+  Vaga Vaga[]
 }
 
 model UserCandidato{
@@ -80,6 +81,7 @@ model CandidatoVaga{
 
 model Vaga{
   id_vaga String @id @default(uuid())
+  id_userEmpresa String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   titulo String @db.Char(100)
@@ -90,18 +92,10 @@ model Vaga{
   quantidade String @db.Char(4)
   dataAbertura DateTime
   dataFechamento DateTime
+  Empresa UserEmpresa @relation(fields: [id_userEmpresa], references: [id_userEmpresa])
   CandidatoVaga CandidatoVaga[]
-  CriaVaga CriarVaga[]
 }
 
-model CriarVaga {
-  id_criaVaga String @id @default(uuid())
-  id_userEmpresa String @unique
-  Empresa UserEmpresa @relation(fields: [id_userEmpresa], references: [id_userEmpresa])
-  id_vaga String @unique
-  Vaga Vaga @relation(fields: [id_vaga], references: [id_vaga])
-  dataCriacao DateTime
-}
 
 model Endereco {
   id_endereco String @id @default(uuid())

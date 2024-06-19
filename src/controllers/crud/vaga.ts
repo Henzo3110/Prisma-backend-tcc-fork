@@ -8,6 +8,7 @@ const Vaga = new PrismaClient();
 async function createVaga(req: Request, res: Response) {
     try {
         const {
+            id_userEmpresa,
             titulo,
             categoria,
             descricao,
@@ -19,11 +20,12 @@ async function createVaga(req: Request, res: Response) {
 
         } = req.body;
         //validacao pelo zod
-        VagaSchema.parse({ titulo, categoria, descricao, requisitos,salario,quantidade, dataAbertura: new Date(dataAbertura).toISOString(), dataFechamento: new Date(dataFechamento).toISOString() });
+        VagaSchema.parse({ id_userEmpresa, titulo, categoria, descricao, requisitos, salario, quantidade, dataAbertura: new Date(dataAbertura).toISOString(), dataFechamento: new Date(dataFechamento).toISOString() });
 
 
         const createdVaga = await Vaga.vaga.create({
             data: {
+                id_userEmpresa,
                 titulo,
                 categoria,
                 descricao,
@@ -47,11 +49,12 @@ async function updateVaga(req: Request, res: Response) {
         const updateData = req.body;
 
         const schema = z.object({
+            id_userEmpresa: z.string().uuid(),
             titulo: z.string().min(1),
             categoria: z.string().min(1),
             descricao: z.string().min(1),
             requisitos: z.string().min(1),
-            salario : z.string().min(1),
+            salario: z.string().min(1),
             quantidade: z.string().min(1),
             dataAbertura: z.string(),
             dataFechamento: z.string(),
@@ -98,9 +101,9 @@ async function findAllVagas(req: Request, res: Response) {
 
 async function findOneVaga(req: Request, res: Response) {
     try {
-        const { id_vaga } = req.params;
+        const { id_userEmpresa } = req.params;
         const VagaExistente = await Vaga.vaga.findUnique({
-            where: { id_vaga }
+            where: { id_userEmpresa }
         })
         if (!VagaExistente) {
             return res.status(404).json({ message: "Vaga não encontrada" });

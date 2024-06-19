@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const VagaSchema = z.object({
+    id_userEmpresa: z.string().uuid(),
     titulo : z.string().min(1),
     categoria : z.string().min(1),
     descricao : z.string().min(1),

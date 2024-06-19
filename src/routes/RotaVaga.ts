@@ -7,7 +7,7 @@ const route = Router();
 route.post("/", createVaga)
 route.put("/update/:id_vaga", updateVaga)
 route.get("/findAll", findAllVagas)
-route.get("/findOne/:id_vaga", findOneVaga)
+route.get("/findOne/:id_userEmpresa", findOneVaga)
 route.delete("/delete/:id_vaga", deleteVaga)
 
 export default route;
