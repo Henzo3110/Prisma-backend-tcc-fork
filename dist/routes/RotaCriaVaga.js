@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const criarVaga_1 = require("../controllers/crud/criarVaga");
+const route = (0, express_1.Router)();
+route.post("/", criarVaga_1.createCriaVaga);
+route.put("/update/:id_criaVaga", criarVaga_1.updateCriaVaga);
+route.get("/findAll", criarVaga_1.findAllCriaVaga);
+route.get("/findOne/:id_criaVaga", criarVaga_1.findOneVagaCriada);
+route.delete("/delete/:id_criaVaga", criarVaga_1.deleteVagaCriada);
+exports.default = route;

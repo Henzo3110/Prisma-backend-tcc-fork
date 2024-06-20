@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const curriculo_form_1 = require("../controllers/crud/curriculo_form");
+const route = (0, express_1.Router)();
+route.post('/', curriculo_form_1.createCurriculo);
+route.put("/update/:id_curriculoForm", curriculo_form_1.updateCurriculo);
+route.get("/findAll", curriculo_form_1.findAllCurriculos);
+route.get("/findOne/:id_userCandidato", curriculo_form_1.findOneCurriculo);
+route.delete("/delete/:id_curriculoForm", curriculo_form_1.deleteCurriculo);
+exports.default = route;

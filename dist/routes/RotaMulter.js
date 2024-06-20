@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const fotoPerfil_1 = require("../controllers/crud/fotoPerfil");
+const route = (0, express_1.Router)();
+route.post("/", fotoPerfil_1.createFotoPerfil);
+route.put("/update/:id_foto", fotoPerfil_1.updateFoto);
+route.get("/findAll", fotoPerfil_1.findAllFotos);
+route.get("/findOne/:id_foto", fotoPerfil_1.findOneFotos);
+route.delete("/delete/:id_foto", fotoPerfil_1.DeleteFotos);
+exports.default = route;

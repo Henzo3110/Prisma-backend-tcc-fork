@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const endereco_1 = require("../controllers/crud/endereco");
+const route = (0, express_1.Router)();
+route.post("/", endereco_1.createEndereco);
+route.put("/update/:id_endereco", endereco_1.UpdateEndereco);
+route.get("/findAll", endereco_1.findAllEnderecos);
+route.get("/findOne/:id_endereco", endereco_1.findOneEndereco);
+route.delete("/delete/:id_endereco", endereco_1.deleteEndereco);
+exports.default = route;
