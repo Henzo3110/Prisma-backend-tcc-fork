@@ -101,9 +101,9 @@ async function findAllVagas(req: Request, res: Response) {
 
 async function findOneVaga(req: Request, res: Response) {
     try {
-        const { id_userEmpresa } = req.params;
+        const { id_vaga } = req.params;
         const VagaExistente = await Vaga.vaga.findUnique({
-            where: { id_userEmpresa }
+            where: { id_vaga }
         })
         if (!VagaExistente) {
             return res.status(404).json({ message: "Vaga não encontrada" });
