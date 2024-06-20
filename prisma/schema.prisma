@@ -74,16 +74,16 @@ model CandidatoVaga{
   id_inscricao String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  id_userCandidato String @unique
+  id_userCandidato String 
   candidato UserCandidato @relation(fields: [id_userCandidato], references: [id_userCandidato])
-  id_vaga String @unique
+  id_vaga String 
   vaga Vaga @relation(fields: [id_vaga], references: [id_vaga])
   dataInscricao DateTime
 }
 
 model Vaga{
   id_vaga String @id @default(uuid())
-  id_userEmpresa String @unique
+  id_userEmpresa String 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   titulo String @db.Char(100)
