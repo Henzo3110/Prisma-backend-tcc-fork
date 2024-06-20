@@ -102,7 +102,6 @@ CREATE TABLE `Vaga` (
     `dataAbertura` DATETIME(3) NOT NULL,
     `dataFechamento` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `Vaga_id_userEmpresa_key`(`id_userEmpresa`),
     PRIMARY KEY (`id_vaga`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
