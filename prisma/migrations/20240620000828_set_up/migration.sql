@@ -24,6 +24,8 @@ CREATE TABLE `UserEmpresa` (
     `ie` CHAR(16) NOT NULL,
     `telefone` CHAR(11) NOT NULL,
     `sobreMim` LONGTEXT NULL,
+    `areaDeAtuacao` LONGTEXT NULL,
+    `especialidades` LONGTEXT NULL,
 
     UNIQUE INDEX `UserEmpresa_id_endereco_key`(`id_endereco`),
     UNIQUE INDEX `UserEmpresa_id_user_key`(`id_user`),
